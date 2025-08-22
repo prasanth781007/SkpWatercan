@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Hydration Calculator</title>
+        <link rel="stylesheet" href="css.css">
+   
+    <style>
+        :root {
+            --main-blue: #2d78c8;
+            --dark-blue: #1e56a0;
+            --error-red: #e74c3c;
+            --background-light: #f8fafc;
+            --text-dark: #1e293b;
+            --gray-medium: #94a3b8;
+            --highlight-green: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-light);
+            margin: 0;
+            padding: 20px;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .hydration-wrapper {
+            width: 100%;
+            max-width: 1600px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Water Image Animation */
+        .water-animation-container {
+            width: 100%;
+            height: 180px;
+            position: relative;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .water-image-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: transform 1s ease, opacity 1s ease;
+            transform: translateX(100%);
+        }
+
+        .water-image-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .water-image-slide.exit {
+            transform: translateX(-100%);
+        }
+
+        /* Calculator Styles */
+        .hydration-calculator-box {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            width: 100%;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideInUp 0.6s forwards 0.2s;
+        }
+
+        @keyframes slideInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .calculator-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .calculator-subtitle {
+            color: var(--gray-medium);
+        }
+
+        .input-field-container {
+            margin-bottom: 1.8rem;
+            position: relative;
+            transform: translateX(-20px);
+            opacity: 0;
+        }
+
+        .field-container-fade-in {
+            animation: slideInRight 0.5s forwards;
+        }
+
+        @keyframes slideInRight {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .user-input-field {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .user-input-field:focus {
+            outline: none;
+            border-color: var(--main-blue);
+            box-shadow: 0 0 0 3px rgba(45, 120, 200, 0.2);
+        }
+
+        .dropdown-select {
+            width: 100%;
+            padding: 0.9rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem;
+        }
+
+        .input-error-message {
+            color: var(--error-red);
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+            display: none;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translateX(-1px); }
+            20%, 80% { transform: translateX(2px); }
+            30%, 50%, 70% { transform: translateX(-3px); }
+            40%, 60% { transform: translateX(3px); }
+        }
+
+        .show-error-message {
+            display: block;
+        }
+
+        .calculate-hydration-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: var(--main-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0.95);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1); }
+            100% { transform: scale(0.95); }
+        }
+
+        .calculate-hydration-btn:hover {
+            background-color: var(--dark-blue);
+            transform: scale(1);
+        }
+
+        .hydration-result-wrapper {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background-color: rgba(16, 185, 129, 0.1);
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .show-results {
+            display: block;
+            animation: resultFadeIn 0.8s forwards;
+        }
+
+        @keyframes resultFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-text {
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .water-amount-output {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--highlight-green);
+            margin-bottom: 1rem;
+        }
+
+        .hydration-tips {
+            font-size: 0.9rem;
+            color: var(--gray-medium);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+       <div class="texture-overlay"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <p class="logo"><img src="IMG-20250815-WA0005-removebg-preview.png" style="width:40px;height:40px;">SKP WATER CAN</p>
+            
+            <ul class="desktop-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#Subscription">Subscription</a></li>
+                <li><a href="#item">Item</a></li>
+                <li><a href="card.html">Card</a></li>
+                <li><a href="#clawater">Cal Water</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#footer">Contact</a></li>
+            </ul>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            
+            <ul class="mobile-menu" id="mobileMenu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#Subscription">Subscription</a></li>
+                <li><a href="card.html">card</a></li>
+                <li><a href="#clawater">Cal Water</a></li>
+                <li><a href="#item">Item</a></li>             
+                <li><a href="#about">About</a></li>
+                <li><a href="#footer">Contact</a></li>
+                         
+            </ul>
+        </div>
+    </nav>
+    <div style="margin-top:100px;"></div>
+    <div class="hydration-wrapper">
+        <!-- Water Animation Images -->
+
+
+        <!-- Calculator -->
+        <div class="hydration-calculator-box">
+            <div class="calculator-header">
+                <h2 class="calculator-title">Hydration Calculator</h2>
+                <p class="calculator-subtitle">Calculate your optimal daily water intake</p>
+            </div>
+
+            <div class="input-field-container field-container-fade-in" style="animation-delay: 0.4s">
+                <label class="input-label" for="height-input">Your Height (cm)</label>
+                <input type="number" id="height-input" class="user-input-field" placeholder="160" min="100" max="250">
+                <div class="input-error-message" id="height-error-message">Enter valid height (100-250cm)</div>
+            </div>
+
+            <div class="input-field-container field-container-fade-in" style="animation-delay: 0.6s">
+                <label class="input-label" for="weight-input">Your Weight (kg)</label>
+                <input type="number" id="weight-input" class="user-input-field" placeholder="70" min="30" max="200">
+                <div class="input-error-message" id="weight-error-message">Enter valid weight (30-200kg)</div>
+            </div>
+
+            <div class="input-field-container field-container-fade-in" style="animation-delay: 0.8s">
+                <label class="input-label" for="activity-select">Activity Level</label>
+                <select id="activity-select" class="dropdown-select">
+                    <option value="">Select your activity level</option>
+                    <option value="0.5">Sedentary (office work, little exercise)</option>
+                    <option value="0.75">Light activity (1-3 workouts/week)</option>
+                    <option value="1.0">Moderate activity (4-5 workouts/week)</option>
+                    <option value="1.25">High activity (daily intense exercise)</option>
+                    <option value="1.5">Athlete (professional training)</option>
+                </select>
+            </div>
+
+            <button class="calculate-hydration-btn" id="calculate-button">Calculate Hydration Needs</button>
+
+            <div class="hydration-result-wrapper" id="results-container">
+                <p class="result-text">Your personalized daily water intake:</p>
+                <div class="water-amount-output" id="water-amount">0 liters</div>
+                <p class="hydration-tips">Spread this throughout your day for optimal hydration. Remember to drink more if you're in hot climates or sweating heavily.</p>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>

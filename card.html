@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Can Order System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+          <script src="ja.js"></script>
+        <link rel="stylesheet" href="css.css">
+        
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7fafc;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .success-message {
+            transition: all 0.3s ease;
+        }
+        
+        .location-pin {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    .water-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+        .water-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 119, 182, 0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+            transform: translateY(-2px);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        .confirmation-message {
+            animation: pulse 2s infinite;
+            border-left: 5px solid #10b981;
+        }
+        .quantity-btn {
+            transition: all 0.2s ease;
+        }
+        .quantity-btn:hover {
+            background-color: #0284c7 !important;
+            color: white !important;
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #e0f2fe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: #0369a1;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body class="font-sans">
+                    <nav class="navbar">
+        <div class="nav-container">
+            <p class="logo"><img src="IMG-20250815-WA0005-removebg-preview.png" style="width:40px;height:40px;">SKP WATER CAN</p>
+            
+            <ul class="desktop-menu">
+                <li><a href="intex.html">Home</a></li>
+  </ul>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            
+            <ul class="mobile-menu" id="mobileMenu">
+                <li><a href="intex.html">Home</a></li>
+        
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+
+    <div id="water-drops-container" class="water-drops-container"></div>
+    
+        <!-- Header -->
+        <header class="text-center mb-12">
+            <div class="flex justify-center mb-6">
+                <img src="" 
+                     alt="Blue water droplet logo representing fresh drinking water" 
+                     class="h-24 w-24 object-contain">
+            </div>
+            <h1 class="text-4xl font-bold text-sky-800 mb-3">AquaPure Water Delivery</h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">Order premium drinking water with free delivery. Fresh, clean water delivered to your doorstep!</p>
+        </header>
+
+        <!-- Features Ribbon -->
+        <div class="bg-sky-50 rounded-lg p-6 mb-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="text-center">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3 class="font-semibold text-sky-800">Free Delivery</h3>
+                <p class="text-sm text-slate-600">Orders over ₹50</p>
+            </div>
+            <div class="text-center">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="font-semibold text-sky-800">Hygienic</h3>
+                <p class="text-sm text-slate-600">Safe packaging</p>
+            </div>
+            <div class="text-center">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-bottle-water"></i>
+                </div>
+                <h3 class="font-semibold text-sky-800">Premium Quality</h3>
+                <p class="text-sm text-slate-600">Mineral enriched</p>
+            </div>
+            <div class="text-center">
+                <div class="feature-icon mb-3">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3 class="font-semibold text-sky-800">24/7 Service</h3>
+                <p class="text-sm text-slate-600">Always available</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Water Cans Section -->
+            <section class="mb-16">
+                <h2 class="text-2xl font-semibold text-sky-800 mb-8 text-center border-b pb-3">Select Your Water Cans</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 20L Card -->
+                    <div class="water-card bg-white rounded-xl overflow-hidden shadow-lg border border-slate-100">
+                        <div class="p-1 bg-sky-100">
+                            <img src="https://placehold.co/600x400/0284c7/ffffff?text=20L+Can" 
+                                 alt="Large blue 20 liter water can with fresh drinking water" 
+                                 class="w-full h-48 object-contain p-2">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-sky-900 mb-1">20 Liter Can</h3>
+                            <div class="flex items-center text-yellow-500 mb-3 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="text-slate-500 ml-2">(42)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-sky-800">₹25</span>
+                                <div class="flex items-center space-x-2">
+                                    <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('20L', -1)">-</button>
+                                    <span id="20L-quantity" class="w-8 text-center">0</span>
+                                    <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('20L', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 10L Card -->
+                    <div class="water-card bg-white rounded-xl overflow-hidden shadow-lg border border-slate-100">
+                        <div class="p-1 bg-sky-100">
+                            <img src="https://placehold.co/600x400/38bdf8/ffffff?text=10L+Can" 
+                                 alt="Medium blue 10 liter water can with purified water" 
+                                 class="w-full h-48 object-contain p-2">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-sky-900 mb-1">10 Liter Can</h3>
+                            <div class="flex items-center text-yellow-500 mb-3 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="text-slate-500 ml-2">(36)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-sky-800">₹20</span>
+                                <div class="flex items-center space-x-2">
+                                    <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('10L', -1)">-</button>
+                                    <span id="10L-quantity" class="w-8 text-center">0</span>
+                                    <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('10L', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5L Card -->
+                    <div class="water-card bg-white rounded-xl overflow-hidden shadow-lg border border-slate-100">
+                        <div class="p-1 bg-sky-100">
+                            <img src="https://placehold.co/600x400/7dd3fc/ffffff?text=5L+Can" 
+                                 alt="Small blue 5 liter water can with mineral water" 
+                                 class="w-full h-48 object-contain p-2">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-sky-900 mb-1">5 Liter Can</h3>
+                            <div class="flex items-center text-yellow-500 mb-3 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="text-slate-500 ml-2">(58)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-sky-800">₹16</span>
+                                <div class="flex items-center space-x-2">
+                                    <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('5L', -1)">-</button>
+                                    <span id="5L-quantity" class="w-8 text-center">0</span>
+                                    <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('5L', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2L Card -->
+                    <div class="water-card bg-white rounded-xl overflow-hidden shadow-lg border border-slate-100">
+                        <div class="p-1 bg-sky-100">
+                            <img src="https://placehold.co/600x400/bae6fd/ffffff?text=2L+Can" 
+                                 alt="Compact blue 2 liter water can with pure water" 
+                                 class="w-full h-48 object-contain p-2">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-sky-900 mb-1">2 Liter Can</h3>
+                            <div class="flex items-center text-yellow-500 mb-3 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <i class="far fa-star"></i>
+                                <span class="text-slate-500 ml-2">(29)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-sky-800">₹14</span>
+                                <div class="flex items-center space-x-2">
+                                    <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('2L', -1)">-</button>
+                                    <span id="2L-quantity" class="w-8 text-center">0</span>
+                                    <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('2L', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1L Card -->
+                    <div class="water-card bg-white rounded-xl overflow-hidden shadow-lg border border-slate-100">
+                        <div class="p-1 bg-sky-100">
+                            <img src="https://placehold.co/600x400/e0f2fe/ffffff?text=1L+Can" 
+                                 alt="Small blue 1 liter water can with drinking water" 
+                                 class="w-full h-48 object-contain p-2">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-sky-900 mb-1">1 Liter Can</h3>
+                            <div class="flex items-center text-yellow-500 mb-3 text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="text-slate-500 ml-2">(47)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-sky-800">₹10</span>
+                                <div class="flex items-center space-x-2">
+                                    <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('1L', -1)">-</button>
+                                    <span id="1L-quantity" class="w-8 text-center">0</span>
+                                    <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('1L', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Info Card -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg border border-slate-100 flex flex-col">
+                        <div class="p-4 bg-gradient-to-r from-sky-500 to-emerald-500 text-white">
+                            <h3 class="text-xl font-bold mb-2 flex items-center">
+                                <i class="fas fa-bolt mr-2"></i> Fast Delivery
+                            </h3>
+                            <p class="text-sm">Same-day delivery available for orders before 12 PM</p>
+                        </div>
+                        <div class="p-5 flex-grow flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center text-emerald-700 mb-3">
+                                    <i class="fas fa-clock mr-2"></i>
+                                    <span>Delivered within 4 hours</span>
+                                </div>
+                                <div class="flex items-center text-emerald-700 mb-3">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Serving entire Chennai</span>
+                                </div>
+                                <div class="flex items-center text-emerald-700">
+                                    <i class="fas fa-check-circle mr-2"></i>
+                                    <span>100% Satisfaction Guarantee</span>
+                                </div>
+                            </div>
+                            <button class="btn-primary text-white py-2 px-4 rounded-lg font-medium mt-4 w-full hover:shadow-lg" onclick="scrollToOrder()">
+                                <i class="fas fa-shopping-cart mr-2"></i> Proceed to Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Order Summary Section -->
+            <section class="mb-16 bg-white rounded-xl shadow-lg border border-slate-100 p-6" id="order-section">
+                <h2 class="text-2xl font-semibold text-sky-800 mb-6 pb-3 border-b">Your Order Summary</h2>
+                <div id="order-summary" class="mb-6">
+                    <div class="grid grid-cols-5 gap-4 font-medium text-slate-700 pb-2 border-b mb-2">
+                        <div>Item</div>
+                        <div>Unit Price</div>
+                        <div>Quantity</div>
+                        <div>Total</div>
+                        <div></div>
+                    </div>
+                    <div id="order-items" class="divide-y">
+                        <div class="py-4 text-center text-slate-500">No items selected yet</div>
+                    </div>
+                    <div class="flex justify-end mt-6">
+                        <div class="text-right bg-sky-50 p-4 rounded-lg w-full md:w-1/2">
+                            <div class="text-lg font-semibold text-slate-700 mb-2 flex justify-between">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">₹0</span>
+                            </div>
+                            <div class="text-sm text-slate-500 mb-3 italic">Free delivery on orders above ₹50</div>
+                            <div class="text-xl font-bold text-sky-800 flex justify-between pt-2 border-t">
+                                <span>Total:</span>
+                                <span id="total">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Order Form -->
+                <h3 class="text-xl font-semibold text-sky-800 mb-4 mt-8">Delivery Information</h3>
+                <form id="order-form" class="space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="name" class="block text-slate-700 mb-2 font-medium">Full Name*</label>
+                            <input type="text" id="name" name="name" required 
+                                   class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-slate-700 mb-2 font-medium">Phone Number*</label>
+                            <input type="tel" id="phone" name="phone" required 
+                                   class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-slate-700 mb-2 font-medium">Email Address*</label>
+                        <input type="email" id="email" name="email" required 
+                               class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                    </div>
+                                <!-- Location Field -->
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <label class="block text-sm font-medium text-gray-700">Current Location</label>
+                    <button type="button" id="getLocationBtn" class="text-sm text-indigo-600 hover:text-indigo-800 flex items-center" >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Get My Location
+                    </button>
+                </div>
+                
+<div id="locationStatus" class="text-sm text-gray-500">
+    Location not yet retrieved
+</div>
+<div id="locationMessage" class="text-sm text-gray-500 mt-2"></div>
+
+                <div id="locationDisplay" class="hidden space-y-2 mt-2">
+                    <div class="flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mr-2 location-pin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <div>
+                            <div id="locationCoordinates" class="text-gray-700"></div>
+                            <div id="locationAddress" class="text-sm text-gray-500"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <input type="hidden" id="latitude" name="latitude">
+                <input type="hidden" id="longitude" name="longitude">
+                <input type="hidden" id="formattedAddress" name="formattedAddress">
+            </div>
+            
+                    <div>
+                        <label for="address" class="block text-slate-700 mb-2 font-medium">Delivery Address*</label>
+                        <textarea id="address" name="address" rows="3" required 
+                                  class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all"></textarea>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label for="delivery-date" class="block text-slate-700 mb-2 font-medium">Preferred Delivery Date*</label>
+                            <input type="date" id="delivery-date" name="delivery-date" 
+                                   class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                        </div>
+                        <div>
+                            <label for="delivery-time" class="block text-slate-700 mb-2 font-medium">Preferred Time*</label>
+                            <select id="delivery-time" name="delivery-time" 
+                                    class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all">
+                                <option value="9AM-12PM">Morning (9AM - 12PM)</option>
+                                <option value="12PM-3PM">Afternoon (12PM - 3PM)</option>
+                                <option value="3PM-6PM">Evening (3PM - 6PM)</option>
+                                <option value="6PM-9PM">Night (6PM - 9PM)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="instructions" class="block text-slate-700 mb-2 font-medium">Special Instructions</label>
+                        <textarea id="instructions" name="instructions" rows="2" 
+                                  class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all" 
+                                  placeholder="Any special delivery instructions?"></textarea>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="agree-terms" name="agree-terms" required 
+                               class="w-5 h-5 rounded border-slate-300 text-sky-600 focus:ring-sky-500">
+                        <label for="agree-terms" class="ml-2 text-slate-700">I agree to the <a href="#" class="text-sky-600 hover:underline">terms and conditions</a></label>
+                    </div>
+                    <input type="hidden" id="order-details" name="order-details">
+                    <button type="submit" class="w-full btn-primary text-white py-3 px-6 rounded-lg font-semibold text-lg hover:shadow-lg transition-all mt-4 flex items-center justify-center">
+                        <i class="fas fa-paper-plane mr-2"></i> Confirm Order
+                    </button>
+                </form>
+                
+                <!-- Success Message -->
+                <div id="success-message" class="hidden mt-6 p-6 bg-emerald-100 rounded-lg border-l-4 border-emerald-500">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-check text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-emerald-800 mb-2">Order Confirmed Successfully!</h3>
+                        <p class="text-emerald-700 mb-4">Thank you for your order. We've sent the details to your email at <span class="font-semibold">prasanthanith5@gmail.com</span></p>
+                        <p class="text-sm text-emerald-700">Our delivery team will contact you shortly to confirm your delivery.</p>
+                        <div id="order-summary-text" class="text-left mt-6 p-4 bg-white rounded w-full max-w-md" style="white-space: pre-line;"></div>
+                        <button onclick="resetForm()" class="mt-6 text-sky-700 font-medium hover:underline">
+                            <i class="fas fa-redo mr-2"></i> Place Another Order
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+
+
+  
+    </div>
+
+    <script>
+        // Prices
+        const prices = {
+            '20L': 25,
+            '10L': 20,
+            '5L': 16,
+            '2L': 14,
+            '1L': 10
+        };
+        
+        // Current quantities
+        const quantities = {
+            '20L': 0,
+            '10L': 0,
+            '5L': 0,
+            '2L': 0,
+            '1L': 0
+        };
+
+        // Update quantity
+        function updateQuantity(size, change) {
+            const newQuantity = quantities[size] + change;
+            if (newQuantity >= 0) {
+                quantities[size] = newQuantity;
+                document.getElementById(`${size}-quantity`).textContent = newQuantity;
+                updateOrderSummary();
+            }
+        }
+
+        // Update order summary
+        function updateOrderSummary() {
+            const orderItemsEl = document.getElementById('order-items');
+            orderItemsEl.innerHTML = '';
+            
+            let subtotal = 0;
+            let hasItems = false;
+            
+            for (const size in quantities) {
+                if (quantities[size] > 0) {
+                    hasItems = true;
+                    const itemTotal = quantities[size] * prices[size];
+                    subtotal += itemTotal;
+                    
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'grid grid-cols-5 gap-4 py-3 items-center';
+                    itemEl.innerHTML = `
+                        <div class="font-medium text-slate-800">${size} Water Can</div>
+                        <div class="text-slate-600">₹${prices[size]}</div>
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('${size}', -1)">-</button>
+                                <span class="w-8 text-center">${quantities[size]}</span>
+                                <button class="quantity-btn bg-sky-100 text-sky-800 w-8 h-8 rounded-full flex items-center justify-center hover:bg-sky-200" onclick="updateQuantity('${size}', 1)">+</button>
+                            </div>
+                        </div>
+                        <div class="font-medium">₹${itemTotal}</div>
+                        <div class="text-right">
+                            <button class="text-red-500 hover:text-red-700" onclick="removeItem('${size}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    orderItemsEl.appendChild(itemEl);
+                }
+            }
+            
+            if (!hasItems) {
+                const emptyEl = document.createElement('div');
+                emptyEl.className = 'py-4 text-center text-slate-500';
+                emptyEl.textContent = 'No items selected yet';
+                orderItemsEl.appendChild(emptyEl);
+            }
+            
+            document.getElementById('subtotal').textContent = `₹${subtotal}`;
+            document.getElementById('total').textContent = `₹${subtotal}`;
+            
+            // Update the hidden order details field
+            updateHiddenOrderDetails();
+        }
+
+        // Update hidden order details field
+        function updateHiddenOrderDetails() {
+            let orderDetails = '';
+            let orderTotal = 0;
+            
+            for (const size in quantities) {
+                if (quantities[size] > 0) {
+                    const itemTotal = quantities[size] * prices[size];
+                    orderTotal += itemTotal;
+                    orderDetails += `${quantities[size]} x ${size} Water Can (₹${prices[size]} each) = ₹${itemTotal}\n`;
+                }
+            }
+            
+            document.getElementById('order-details').value = orderDetails;
+            document.getElementById('total-amount').value = orderTotal;
+        }
+
+        // Remove item
+        function removeItem(size) {
+            quantities[size] = 0;
+            document.getElementById(`${size}-quantity`).textContent = '0';
+            updateOrderSummary();
+        }
+
+        // Scroll to order section
+        function scrollToOrder() {
+            const orderSection = document.getElementById('order-section');
+            if (orderSection) {
+                orderSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Reset form and quantities
+        function resetForm() {
+            document.getElementById('order-form').reset();
+            document.getElementById('order-form').classList.remove('hidden');
+            document.getElementById('success-message').classList.add('hidden');
+            
+            for (const size in quantities) {
+                quantities[size] = 0;
+                document.getElementById(`${size}-quantity`).textContent = '0';
+            }
+            
+            updateOrderSummary();
+            
+            // Reset delivery date to today
+            document.getElementById('delivery-date').value = new Date().toISOString().split('T')[0];
+        }
+
+        // Handle form submission
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const deliveryDate = document.getElementById('delivery-date').value;
+            const deliveryTime = document.getElementById('delivery-time').value;
+            const instructions = document.getElementById('instructions').value;
+            const orderDetails = document.getElementById('order-details').value;
+            const totalAmount = document.getElementById('total-amount').value;
+            
+            // Prepare order summary for display
+            let summaryText = `Order Details for ${name}\n\n`;
+            summaryText += `Contact: ${phone}\n`;
+            summaryText += `Email: ${email}\n\n`;
+            summaryText += `Delivery Address:\n${address}\n\n`;
+            summaryText += `Delivery Date: ${deliveryDate || 'Not specified'}\n`;
+            summaryText += `Delivery Time: ${deliveryTime}\n\n`;
+            summaryText += `Order Items:\n${orderDetails}\n`;
+            summaryText += `Total Amount: ₹${totalAmount}\n\n`;
+            summaryText += `Special Instructions: ${instructions || 'None provided'}`;
+            
+            // Show success message
+            document.getElementById('order-form').classList.add('hidden');
+            document.getElementById('success-message').classList.remove('hidden');
+            document.getElementById('order-summary-text').textContent = summaryText;
+            
+            // In a real application, you would send this data to your server
+            // For this demo, we'll simulate email sending by logging to console
+            console.log('======= Order Email Content =======');
+            console.log('To: prasanthanith5@gmail.com');
+            console.log('Subject: New Water Can Order');
+            console.log('\n' + summaryText);
+            console.log('==================================');
+            
+            // In a production environment, you would:
+            // 1. Send the data to your backend server
+            // 2. Your server would process the order
+            // 3. Your server would send the email with the order details
+            
+            // Reset form after a delay (simulate email sending)
+            setTimeout(() => {
+                resetForm();
+            }, 10000);
+        });
+
+        // Initialize delivery date min value
+        document.getElementById('delivery-date').min = new Date().toISOString().split('T')[0];
+    
+           document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('customerForm');
+            const getLocationBtn = document.getElementById('getLocationBtn');
+            const locationStatus = document.getElementById('locationStatus');
+            const locationDisplay = document.getElementById('locationDisplay');
+            const locationCoordinates = document.getElementById('locationCoordinates');
+            const locationAddress = document.getElementById('locationAddress');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Geolocation
+            getLocationBtn.addEventListener('click', function() {
+                locationStatus.textContent = "Locating...";
+                
+                if (!navigator.geolocation) {
+                    locationStatus.textContent = "Geolocation is not supported by your browser";
+                    return;
+                }
+                
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        // Get coordinates
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        
+                        // Update hidden fields
+                        document.getElementById('latitude').value = latitude;
+                        document.getElementById('longitude').value = longitude;
+                        
+                        // Display coordinates
+                        locationCoordinates.textContent = `Coordinates: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+                        
+                        // Reverse geocoding to get address
+                        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                let address = "";
+                                if (data.address) {
+                                    address = [
+                                        data.address.road,
+                                        data.address.neighbourhood,
+                                        data.address.suburb,
+                                        data.address.city,
+                                        data.address.state,
+                                        data.address.postcode
+                                    ].filter(Boolean).join(", ");
+                                }
+                                
+                                if (!address) address = "Address not available";
+                                
+                                locationAddress.textContent = address;
+                                document.getElementById('formattedAddress').value = address;
+                                
+                                locationStatus.textContent = "Location retrieved!";
+                                locationDisplay.classList.remove('hidden');
+                            })
+                            .catch(error => {
+                                console.error("Reverse geocoding error:", error);
+                                locationAddress.textContent = "Could not retrieve address details";
+                                document.getElementById('formattedAddress').value = "Address unavailable - coordinates only";
+                                
+                                locationStatus.textContent = "Location retrieved (address not available)";
+                                locationDisplay.classList.remove('hidden');
+                            });
+                    },
+                    function(error) {
+                        let errorMsg = "Unable to retrieve your location";
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMsg = "Location access was denied by user";
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMsg = "Location information is unavailable";
+                                break;
+                            case error.TIMEOUT:
+                                errorMsg = "The request to get location timed out";
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                errorMsg = "An unknown error occurred";
+                                break;
+                        }
+                        
+                        locationStatus.textContent = errorMsg;
+                        errorText.textContent = errorMsg;
+                        errorMessage.classList.remove('hidden');
+                    }
+                );
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate form
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const address = document.getElementById('address').value.trim();
+                const latitude = document.getElementById('latitude').value;
+                const longitude = document.getElementById('longitude').value;
+                
+                if (!name || !email || !phone || !address) {
+                    errorText.textContent = "Please fill in all required fields";
+                    errorMessage.classList.remove('hidden');
+                    return;
+                }
+                
+                // Get all form data
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+                
+                // Add recipient email
+                data.recipientEmail = "prasanthanith5@gmail.com";
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `
+                    <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                `;
+                
+                // Simulate email sending (in a real app, this would be an API call to your backend)
+                setTimeout(() => {
+                    // Log the data (in a real app, this would be sent to your backend)
+                    console.log("Form data to be emailed:", data);
+                    
+                    // Show success message
+                    successMessage.classList.remove('hidden');
+                    errorMessage.classList.add('hidden');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Submit Information";
+                    
+                    // Reset form (commented out for demo purposes)
+                    // form.reset();
+                    // locationStatus.textContent = "Location not yet retrieved";
+                    // locationDisplay.classList.add('hidden');
+                }, 2000);
+            });
+        });
+// Update hidden order details field
+function updateHiddenOrderDetails() {
+    let orderDetails = '';
+    let orderTotal = 0;
+    
+    for (const size in quantities) {
+        if (quantities[size] > 0) {
+            const itemTotal = quantities[size] * prices[size];
+            orderTotal += itemTotal;
+            orderDetails += `${quantities[size]} x ${size} Water Can (₹${prices[size]} each) = ₹${itemTotal}\n`;
+        }
+    }
+    
+    document.getElementById('order-details').value = orderDetails;
+    document.getElementById('total-amount').value = orderTotal;
+}
+
+// Handle form submission
+document.getElementById('order-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const address = document.getElementById('address').value;
+    const deliveryDate = document.getElementById('delivery-date').value;
+    const deliveryTime = document.getElementById('delivery-time').value;
+    const instructions = document.getElementById('instructions').value;
+    const orderDetails = document.getElementById('order-details').value;
+    const totalAmount = document.getElementById('total').textContent.replace('₹', '').trim();
+    
+    // Get location details
+    const locationCoordinates = document.getElementById('locationCoordinates').textContent;
+    const locationAddress = document.getElementById('formattedAddress').value || "Location not provided";
+
+    // Prepare order summary for display
+    let summaryText = `Order Details for ${name}\n\n`;
+    summaryText += `Contact: ${phone}\n`;
+    summaryText += `Email: ${email}\n\n`;
+    summaryText += `Delivery Address:\n${address}\n`;
+    summaryText += `Current Location:\n${locationAddress} (${locationCoordinates})\n\n`;
+    summaryText += `Delivery Date: ${deliveryDate || 'Not specified'}\n`;
+    summaryText += `Delivery Time: ${deliveryTime}\n\n`;
+    summaryText += `Order Items:\n${orderDetails}\n`;
+    summaryText += `Total Amount: ₹${totalAmount}\n\n`;
+    summaryText += `Special Instructions: ${instructions || 'None provided'}`;
+    
+    // Show success message
+    document.getElementById('order-form').classList.add('hidden');
+    document.getElementById('success-message').classList.remove('hidden');
+    document.getElementById('order-summary-text').textContent = summaryText;
+
+    // Create WhatsApp message link
+    const whatsappMessage = encodeURIComponent(summaryText);
+    const whatsappNumber = '7810078875';
+    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+    
+    // Open WhatsApp link in a new tab
+    window.open(whatsappLink, '_blank');
+
+    // Reset form after a delay (simulate email sending)
+    setTimeout(() => {
+        resetForm();
+    }, 10000);
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const getLocationBtn = document.getElementById('getLocationBtn');
+    const locationStatus = document.getElementById('locationStatus');
+    const locationMessage = document.getElementById('locationMessage');
+    const locationDisplay = document.getElementById('locationDisplay');
+    const locationCoordinates = document.getElementById('locationCoordinates');
+    const locationAddress = document.getElementById('locationAddress');
+
+    // Automatically get location on page load
+    getLocation();
+
+    // Function to get location
+    function getLocation() {
+        locationStatus.textContent = "Locating...";
+        
+        if (!navigator.geolocation) {
+            locationStatus.textContent = "Geolocation is not supported by your browser";
+            return;
+        }
+        
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                // Get coordinates
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                
+                // Update hidden fields
+                document.getElementById('latitude').value = latitude;
+                document.getElementById('longitude').value = longitude;
+                
+                // Display coordinates
+                locationCoordinates.textContent = `Coordinates: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+                
+                // Reverse geocoding to get address
+                fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let address = "";
+                        if (data.address) {
+                            address = [
+                                data.address.road,
+                                data.address.neighbourhood,
+                                data.address.suburb,
+                                data.address.city,
+                                data.address.state,
+                                data.address.postcode
+                            ].filter(Boolean).join(", ");
+                        }
+                        
+                        if (!address) address = "Address not available";
+                        
+                        locationAddress.textContent = address;
+                        document.getElementById('formattedAddress').value = address;
+                        
+                        locationStatus.textContent = "Location retrieved!";
+                        locationMessage.textContent = `Your current location is: ${address}`;
+                        locationDisplay.classList.remove('hidden');
+                    })
+                    .catch(error => {
+                        console.error("Reverse geocoding error:", error);
+                        locationAddress.textContent = "Could not retrieve address details";
+                        document.getElementById('formattedAddress').value = "Address unavailable - coordinates only";
+                        
+                        locationStatus.textContent = "Location retrieved (address not available)";
+                        locationMessage.textContent = "Your current location coordinates have been retrieved.";
+                        locationDisplay.classList.remove('hidden');
+                    });
+            },
+            function(error) {
+                let errorMsg = "Unable to retrieve your location";
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        errorMsg = "Location access was denied by user";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        errorMsg = "Location information is unavailable";
+                        break;
+                    case error.TIMEOUT:
+                        errorMsg = "The request to get location timed out";
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        errorMsg = "An unknown error occurred";
+                        break;
+                }
+                
+                locationStatus.textContent = errorMsg;
+                locationMessage.textContent = errorMsg;
+            }
+        );
+    }
+});
+
+       </script>
+</body>
+</html>
